@@ -231,51 +231,81 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
         .text('right');
     }
 
-    // Current sum display
+    // Algorithm Structure Visualization
+    const algorithmY = 160;
+    const whileBoxWidth = innerWidth * 0.8;
+    const whileBoxHeight = 120;
+    const whileBoxX = (innerWidth - whileBoxWidth) / 2;
+
+    // While loop container
+    g.append('rect')
+      .attr('x', whileBoxX)
+      .attr('y', algorithmY)
+      .attr('width', whileBoxWidth)
+      .attr('height', whileBoxHeight)
+      .attr('rx', 8)
+      .attr('class', `while-container ${leftPointer < rightPointer ? 'active' : 'inactive'}`);
+
+    // While loop title
     g.append('text')
-      .attr('x', innerWidth / 2)
-      .attr('y', 130)
-      .attr('text-anchor', 'middle')
-      .attr('class', 'sum-text')
-      .text(`Current Sum: ${array[leftPointer]} + ${array[rightPointer]} = ${currentSum}`);
+      .attr('x', whileBoxX + 10)
+      .attr('y', algorithmY + 15)
+      .attr('class', 'while-title')
+      .text('while (left < right)');
 
-    // Target comparison
+    // Sections within while loop - vertically stacked
+    const sectionWidth = whileBoxWidth - 20;
+    const section1X = whileBoxX + 10;
+    const section2X = whileBoxX + 10;
+    const section1Y = algorithmY + 25;
+    const section2Y = algorithmY + 70;
+    const sectionHeight = 40;
+
+    // Current sum section
+    g.append('rect')
+      .attr('x', section1X)
+      .attr('y', section1Y)
+      .attr('width', sectionWidth)
+      .attr('height', sectionHeight)
+      .attr('rx', 4)
+      .attr('class', `algorithm-section ${phase === 'processing' ? 'active' : ''}`);
+
     g.append('text')
-      .attr('x', innerWidth / 2)
-      .attr('y', 150)
-      .attr('text-anchor', 'middle')
-      .attr('class', currentSum === target ? 'result-found' : 'result-searching')
-      .text(currentSum === target ? `Found target ${target}!` : `Target: ${target}`);
+      .attr('x', section1X + 10)
+      .attr('y', section1Y + 15)
+      .attr('class', 'section-title')
+      .text('1. Calculate Sum');
 
-    // Algorithm state display
-    if (phase !== 'idle') {
-      g.append('text')
-        .attr('x', innerWidth / 2)
-        .attr('y', 175)
-        .attr('text-anchor', 'middle')
-        .attr('class', 'phase-text')
-        .text(`Iteration ${iteration} - Phase: ${phase.toUpperCase()}`);
-    }
+    g.append('text')
+      .attr('x', section1X + 10)
+      .attr('y', section1Y + 30)
+      .attr('class', 'section-value')
+      .text(`${array[leftPointer]} + ${array[rightPointer]} = ${currentSum}`);
 
-    // Decision display
-    if (decision) {
-      g.append('text')
-        .attr('x', innerWidth / 2)
-        .attr('y', 195)
-        .attr('text-anchor', 'middle')
-        .attr('class', 'decision-text')
-        .text(decision);
-    }
+    // Loop condition section
+    g.append('rect')
+      .attr('x', section2X)
+      .attr('y', section2Y)
+      .attr('width', sectionWidth)
+      .attr('height', sectionHeight)
+      .attr('rx', 4)
+      .attr('class', `algorithm-section ${phase === 'deciding' ? 'active' : ''}`);
 
-    // Next action display
-    if (nextAction) {
-      g.append('text')
-        .attr('x', innerWidth / 2)
-        .attr('y', 215)
-        .attr('text-anchor', 'middle')
-        .attr('class', 'action-text')
-        .text(`Next: ${nextAction}`);
-    }
+    g.append('text')
+      .attr('x', section2X + 10)
+      .attr('y', section2Y + 15)
+      .attr('class', 'section-title')
+      .text('2. Compare & Decide');
+
+    const comparisonText = currentSum === target ? `${currentSum} = ${target}` : 
+                          currentSum < target ? `${currentSum} < ${target}` : 
+                          `${currentSum} > ${target}`;
+    
+    g.append('text')
+      .attr('x', section2X + 10)
+      .attr('y', section2Y + 30)
+      .attr('class', 'section-value')
+      .text(comparisonText);
 
   }, [array, leftPointer, rightPointer, currentSum, target, phase, iteration, decision, nextAction]);
 
@@ -310,7 +340,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
         <svg
           ref={svgRef}
           width="800"
-          height="280"
+          height="380"
           className="visualization-svg"
         />
       </div>
@@ -338,21 +368,6 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
           >
             Stop
           </button>
-        </div>
-        
-        <div className="algorithm-status">
-          <div className="status-item">
-            <span className="label">Loop Condition:</span>
-            <span className={`value ${leftPointer < rightPointer ? 'active' : 'inactive'}`}>
-              left ({leftPointer}) {'<'} right ({rightPointer}) = {leftPointer < rightPointer ? 'true' : 'false'}
-            </span>
-          </div>
-          {phase !== 'idle' && (
-            <div className="status-item">
-              <span className="label">Current Phase:</span>
-              <span className="value phase">{phase.toUpperCase()}</span>
-            </div>
-          )}
         </div>
       </div>
     </div>

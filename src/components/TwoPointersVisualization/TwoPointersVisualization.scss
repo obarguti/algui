@@ -319,4 +319,52 @@
     font-style: italic;
     font-family: 'Segoe UI', sans-serif;
   }
+
+  .while-container {
+    stroke-width: 2;
+    fill: rgba(0, 122, 204, 0.05);
+
+    &.active {
+      stroke: #007acc;
+      fill: rgba(0, 122, 204, 0.1);
+    }
+
+    &.inactive {
+      stroke: #dc3545;
+      fill: rgba(220, 53, 69, 0.05);
+    }
+  }
+
+  .while-title {
+    fill: #495057;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+  }
+
+  .algorithm-section {
+    fill: #f8f9fa;
+    stroke: #dee2e6;
+    stroke-width: 1;
+
+    &.active {
+      fill: #d4edda;
+      stroke: #28a745;
+      stroke-width: 2;
+    }
+  }
+
+  .section-title {
+    fill: #495057;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .section-value {
+    fill: #007acc;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+  }
 }

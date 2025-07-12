@@ -1,0 +1,1 @@
+export { AlgorithmDetailPage } from './AlgorithmDetailPage';

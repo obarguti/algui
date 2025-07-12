@@ -1,0 +1,232 @@
+{
+  "algorithms": [
+    {
+      "id": "two-pointers-collision",
+      "name": "Two Pointers - Collision Pattern",
+      "description": "Used for Two Sum in sorted array, palindrome checking, container with most water. Time: O(n), Space: O(1)",
+      "category": "Two Pointers"
+    },
+    {
+      "id": "two-pointers-parallel",
+      "name": "Two Pointers - Parallel Pattern",
+      "description": "Used for merging sorted arrays, subsequence validation. Time: O(n + m), Space: O(1)",
+      "category": "Two Pointers"
+    },
+    {
+      "id": "two-pointers-slow-fast",
+      "name": "Two Pointers - Slow/Fast Pattern",
+      "description": "Used for removing duplicates, move zeros, partition arrays. Time: O(n), Space: O(1)",
+      "category": "Two Pointers"
+    },
+    {
+      "id": "binary-search-target",
+      "name": "Binary Search - Find Target",
+      "description": "Classic binary search, search in rotated array. Time: O(log n), Space: O(1)",
+      "category": "Binary Search"
+    },
+    {
+      "id": "binary-search-boundary",
+      "name": "Binary Search - Find Boundary",
+      "description": "Find first/last occurrence, search insert position. Time: O(log n), Space: O(1)",
+      "category": "Binary Search"
+    },
+    {
+      "id": "sliding-window-fixed",
+      "name": "Sliding Window - Fixed Size",
+      "description": "Maximum sum subarray of size k, average of subarrays. Time: O(n), Space: O(1)",
+      "category": "Sliding Window"
+    },
+    {
+      "id": "sliding-window-variable",
+      "name": "Sliding Window - Variable Size",
+      "description": "Longest substring without repeating characters, minimum window substring. Time: O(n), Space: O(k)",
+      "category": "Sliding Window"
+    },
+    {
+      "id": "floyd-cycle-detection",
+      "name": "Floyd's Cycle Detection",
+      "description": "Cycle detection, finding middle node, nth from end using slow/fast pointers. Time: O(n), Space: O(1)",
+      "category": "Linked List"
+    },
+    {
+      "id": "linked-list-reversal",
+      "name": "Linked List Reversal",
+      "description": "Reverse linked list, palindrome checking. Time: O(n), Space: O(1)",
+      "category": "Linked List"
+    },
+    {
+      "id": "binary-tree-dfs-recursive",
+      "name": "Binary Tree - DFS Recursive Traversal",
+      "description": "Tree validation, path problems, tree modification. Time: O(n), Space: O(h)",
+      "category": "Binary Tree"
+    },
+    {
+      "id": "binary-tree-bfs",
+      "name": "Binary Tree - BFS Level Order Traversal",
+      "description": "Level order traversal, zigzag traversal, tree width. Time: O(n), Space: O(w)",
+      "category": "Binary Tree"
+    },
+    {
+      "id": "binary-tree-dfs-preorder",
+      "name": "Binary Tree - DFS PreOrder Iterative",
+      "description": "Iterative preorder traversal, tree serialization. Time: O(n), Space: O(h)",
+      "category": "Binary Tree"
+    },
+    {
+      "id": "binary-tree-dfs-inorder",
+      "name": "Binary Tree - DFS InOrder Iterative",
+      "description": "BST validation, kth smallest element. Time: O(n), Space: O(h)",
+      "category": "Binary Tree"
+    },
+    {
+      "id": "binary-tree-dfs-postorder",
+      "name": "Binary Tree - DFS PostOrder Iterative",
+      "description": "Tree deletion, calculating tree properties. Time: O(n), Space: O(h)",
+      "category": "Binary Tree"
+    },
+    {
+      "id": "graph-dfs",
+      "name": "Graph - DFS Traversal",
+      "description": "Connected components, path finding, topological sort. Time: O(V + E), Space: O(V)",
+      "category": "Graph"
+    },
+    {
+      "id": "graph-bfs",
+      "name": "Graph - BFS Traversal",
+      "description": "Shortest path in unweighted graph, level-wise exploration. Time: O(V + E), Space: O(V)",
+      "category": "Graph"
+    },
+    {
+      "id": "dijkstra-algorithm",
+      "name": "Dijkstra's Algorithm",
+      "description": "Single source shortest path in weighted graph. Time: O((V + E) log V), Space: O(V)",
+      "category": "Graph"
+    },
+    {
+      "id": "backtrack-subsets",
+      "name": "Backtracking - Generate Subsets",
+      "description": "Power set, subset sum problems. Time: O(2^n), Space: O(n)",
+      "category": "Backtracking"
+    },
+    {
+      "id": "backtrack-permutations",
+      "name": "Backtracking - Generate Permutations",
+      "description": "All permutations, arrangement problems. Time: O(n! * n), Space: O(n)",
+      "category": "Backtracking"
+    },
+    {
+      "id": "backtrack-combinations",
+      "name": "Backtracking - Generate Combinations",
+      "description": "Choose k elements from n, combination problems. Time: O(C(n,k) * k), Space: O(k)",
+      "category": "Backtracking"
+    },
+    {
+      "id": "dp-memoization",
+      "name": "Dynamic Programming - Memoization (Top-Down)",
+      "description": "Fibonacci, climbing stairs, decode ways. Time: O(n), Space: O(n)",
+      "category": "Dynamic Programming"
+    },
+    {
+      "id": "dp-tabulation",
+      "name": "Dynamic Programming - Tabulation (Bottom-Up)",
+      "description": "Fibonacci, climbing stairs, house robber. Time: O(n), Space: O(n)",
+      "category": "Dynamic Programming"
+    },
+    {
+      "id": "dp-2d-tabulation",
+      "name": "Dynamic Programming - 2D Tabulation",
+      "description": "Edit distance, longest common subsequence, unique paths. Time: O(m * n), Space: O(m * n)",
+      "category": "Dynamic Programming"
+    },
+    {
+      "id": "dp-coin-change",
+      "name": "Dynamic Programming - Coin Change",
+      "description": "Minimum coins, coin change variations. Time: O(amount * coins), Space: O(amount)",
+      "category": "Dynamic Programming"
+    },
+    {
+      "id": "dp-2d-grid",
+      "name": "Dynamic Programming - 2D Grid",
+      "description": "Unique paths, minimum path sum, dungeon game. Time: O(m * n), Space: O(m * n)",
+      "category": "Dynamic Programming"
+    },
+    {
+      "id": "array-prefix-sum",
+      "name": "Array - Prefix Sum",
+      "description": "Range sum queries, subarray sum problems. Time: O(n), Space: O(n)",
+      "category": "Array"
+    },
+    {
+      "id": "array-subarray-sum",
+      "name": "Array - Subarray Sum with Target",
+      "description": "Subarray sum equals k, maximum subarray sum. Time: O(n), Space: O(n)",
+      "category": "Array"
+    },
+    {
+      "id": "heap-top-k",
+      "name": "Heap - Top K Elements",
+      "description": "Kth largest element, top k frequent elements. Time: O(n log k), Space: O(k)",
+      "category": "Heap"
+    },
+    {
+      "id": "stack-monotonic",
+      "name": "Stack - Monotonic Stack",
+      "description": "Next greater element, largest rectangle in histogram. Time: O(n), Space: O(n)",
+      "category": "Stack"
+    },
+    {
+      "id": "hash-frequency",
+      "name": "Hash - Frequency Counter",
+      "description": "Character frequency, anagram problems. Time: O(n), Space: O(k)",
+      "category": "Hash Table"
+    },
+    {
+      "id": "hash-two-sum",
+      "name": "Hash - Two Sum Pattern",
+      "description": "Two sum, three sum, four sum problems. Time: O(n), Space: O(n)",
+      "category": "Hash Table"
+    },
+    {
+      "id": "trie-implementation",
+      "name": "Trie Implementation",
+      "description": "Word search, autocomplete, prefix matching. Time: O(m), Space: O(ALPHABET_SIZE * N * M)",
+      "category": "Trie"
+    },
+    {
+      "id": "intervals-merge",
+      "name": "Intervals - Merge Overlapping",
+      "description": "Merge intervals, insert interval, meeting rooms. Time: O(n log n), Space: O(n)",
+      "category": "Intervals"
+    },
+    {
+      "id": "greedy-activity-selection",
+      "name": "Greedy - Activity Selection",
+      "description": "Meeting rooms, non-overlapping intervals. Time: O(n log n), Space: O(1)",
+      "category": "Greedy"
+    },
+    {
+      "id": "bit-manipulation-basics",
+      "name": "Bit Manipulation - Common Operations",
+      "description": "Single number, power of 2, bit counting. Time: O(1), Space: O(1)",
+      "category": "Bit Manipulation"
+    },
+    {
+      "id": "math-gcd-lcm",
+      "name": "Math - GCD and LCM",
+      "description": "GCD problems, fraction simplification. Time: O(log min(a,b)), Space: O(1)",
+      "category": "Math"
+    },
+    {
+      "id": "geometry-point-line",
+      "name": "Geometry - Point and Line Operations",
+      "description": "Geometric problems, line intersection, distance calculation",
+      "category": "Geometry"
+    },
+    {
+      "id": "union-find",
+      "name": "Union Find - Disjoint Set",
+      "description": "Connected components, cycle detection, MST. Time: O(α(n)), Space: O(n)",
+      "category": "Union Find"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import * as d3 from 'd3';
 import './TwoPointersVisualization.scss';
+
+type AlgorithmPhase = 'idle' | 'processing' | 'deciding' | 'moving' | 'found' | 'not-found';
 
 interface TwoPointersVisualizationProps {
   className?: string;
@@ -16,6 +18,13 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
   const [leftPointer, setLeftPointer] = useState(0);
   const [rightPointer, setRightPointer] = useState(6);
   const [currentSum, setCurrentSum] = useState(0);
+  
+  // Algorithm state
+  const [phase, setPhase] = useState<AlgorithmPhase>('idle');
+  const [iteration, setIteration] = useState(0);
+  const [isAutoRunning, setIsAutoRunning] = useState(false);
+  const [decision, setDecision] = useState<string>('');
+  const [nextAction, setNextAction] = useState<string>('');
 
   // Parse array input
   const parseArrayInput = () => {
@@ -38,7 +47,93 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
     if (parseArrayInput()) {
       setLeftPointer(0);
       setRightPointer(array.length - 1);
+      setPhase('idle');
+      setIteration(0);
+      setIsAutoRunning(false);
+      setDecision('');
+      setNextAction('');
     }
+  };
+
+  // Execute one step of the algorithm
+  const executeStep = useCallback(() => {
+    if (leftPointer >= rightPointer) {
+      setPhase('not-found');
+      setDecision('left >= right, target not found');
+      setNextAction('Algorithm complete');
+      setIsAutoRunning(false);
+      return;
+    }
+
+    const sum = array[leftPointer] + array[rightPointer];
+    
+    if (phase === 'idle' || phase === 'moving') {
+      // Processing phase
+      setPhase('processing');
+      setDecision(`Calculate: ${array[leftPointer]} + ${array[rightPointer]} = ${sum}`);
+      setNextAction('Comparing with target...');
+      return;
+    }
+
+    if (phase === 'processing') {
+      // Deciding phase
+      setPhase('deciding');
+      if (sum === target) {
+        setDecision(`${sum} = ${target} ✓ Found target!`);
+        setNextAction('Solution found');
+        setPhase('found');
+        setIsAutoRunning(false);
+      } else if (sum < target) {
+        setDecision(`${sum} < ${target}, need larger sum`);
+        setNextAction('Move left pointer right →');
+      } else {
+        setDecision(`${sum} > ${target}, need smaller sum`);
+        setNextAction('Move right pointer left ←');
+      }
+      return;
+    }
+
+    if (phase === 'deciding') {
+      // Moving phase
+      setPhase('moving');
+      if (currentSum < target) {
+        setLeftPointer(prev => prev + 1);
+      } else if (currentSum > target) {
+        setRightPointer(prev => prev - 1);
+      }
+      setIteration(prev => prev + 1);
+      setDecision('');
+      setNextAction('');
+    }
+  }, [array, leftPointer, rightPointer, target, currentSum, phase]);
+
+  // Auto-run functionality
+  useEffect(() => {
+    if (isAutoRunning && phase !== 'found' && phase !== 'not-found') {
+      const timeout = setTimeout(executeStep, 1500);
+      return () => clearTimeout(timeout);
+    }
+  }, [isAutoRunning, phase, executeStep]);
+
+  // Start auto-run
+  const startAutoRun = () => {
+    if (phase === 'idle') {
+      setPhase('processing');
+    }
+    setIsAutoRunning(true);
+  };
+
+  // Stop auto-run
+  const stopAutoRun = () => {
+    setIsAutoRunning(false);
+  };
+
+  // Manual step
+  const nextStep = () => {
+    if (phase === 'idle') {
+      setPhase('processing');
+    }
+    executeStep();
   };
 
   // Calculate current sum
@@ -152,7 +247,37 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
       .attr('class', currentSum === target ? 'result-found' : 'result-searching')
       .text(currentSum === target ? `Found target ${target}!` : `Target: ${target}`);
 
-  }, [array, leftPointer, rightPointer, currentSum, target]);
+    // Algorithm state display
+    if (phase !== 'idle') {
+      g.append('text')
+        .attr('x', innerWidth / 2)
+        .attr('y', 175)
+        .attr('text-anchor', 'middle')
+        .attr('class', 'phase-text')
+        .text(`Iteration ${iteration} - Phase: ${phase.toUpperCase()}`);
+    }
+
+    // Decision display
+    if (decision) {
+      g.append('text')
+        .attr('x', innerWidth / 2)
+        .attr('y', 195)
+        .attr('text-anchor', 'middle')
+        .attr('class', 'decision-text')
+        .text(decision);
+    }
+
+    // Next action display
+    if (nextAction) {
+      g.append('text')
+        .attr('x', innerWidth / 2)
+        .attr('y', 215)
+        .attr('text-anchor', 'middle')
+        .attr('class', 'action-text')
+        .text(`Next: ${nextAction}`);
+    }
+
+  }, [array, leftPointer, rightPointer, currentSum, target, phase, iteration, decision, nextAction]);
 
   return (
     <div className={`two-pointers-visualization ${className}`}>
@@ -177,7 +302,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
           />
         </div>
         <button onClick={resetVisualization} className="refresh-btn">
-          Refresh
+          Reset
         </button>
       </div>
       
@@ -185,36 +310,50 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
         <svg
           ref={svgRef}
           width="800"
-          height="200"
+          height="280"
           className="visualization-svg"
         />
       </div>
       
-      <div className="pointer-controls">
-        <button 
-          onClick={() => setLeftPointer(Math.max(0, leftPointer - 1))}
-          disabled={leftPointer <= 0}
-        >
-          ← Move Left
-        </button>
-        <button 
-          onClick={() => setLeftPointer(Math.min(array.length - 1, leftPointer + 1))}
-          disabled={leftPointer >= array.length - 1}
-        >
-          Move Left →
-        </button>
-        <button 
-          onClick={() => setRightPointer(Math.max(0, rightPointer - 1))}
-          disabled={rightPointer <= 0}
-        >
-          ← Move Right
-        </button>
-        <button 
-          onClick={() => setRightPointer(Math.min(array.length - 1, rightPointer + 1))}
-          disabled={rightPointer >= array.length - 1}
-        >
-          Move Right →
-        </button>
+      <div className="algorithm-controls">
+        <div className="step-controls">
+          <button 
+            onClick={nextStep}
+            disabled={phase === 'found' || phase === 'not-found' || isAutoRunning}
+            className="step-btn"
+          >
+            Next Step
+          </button>
+          <button 
+            onClick={startAutoRun}
+            disabled={phase === 'found' || phase === 'not-found' || isAutoRunning}
+            className="auto-btn"
+          >
+            Auto Run
+          </button>
+          <button 
+            onClick={stopAutoRun}
+            disabled={!isAutoRunning}
+            className="stop-btn"
+          >
+            Stop
+          </button>
+        </div>
+        
+        <div className="algorithm-status">
+          <div className="status-item">
+            <span className="label">Loop Condition:</span>
+            <span className={`value ${leftPointer < rightPointer ? 'active' : 'inactive'}`}>
+              left ({leftPointer}) {'<'} right ({rightPointer}) = {leftPointer < rightPointer ? 'true' : 'false'}
+            </span>
+          </div>
+          {phase !== 'idle' && (
+            <div className="status-item">
+              <span className="label">Current Phase:</span>
+              <span className="value phase">{phase.toUpperCase()}</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

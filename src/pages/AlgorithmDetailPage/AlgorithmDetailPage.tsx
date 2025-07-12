@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import algorithmService from '../../services/algorithmService';
+import { TwoPointersVisualization } from '../../components';
 import './AlgorithmDetailPage.scss';
 
 export const AlgorithmDetailPage: React.FC = () => {
@@ -63,6 +64,14 @@ export const AlgorithmDetailPage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Interactive Visualization */}
+        {algorithm.id === 'two-pointers-collision' && (
+          <div className="visualization-section">
+            <h2>Interactive Visualization</h2>
+            <TwoPointersVisualization />
+          </div>
+        )}
       </div>
     </div>
   );

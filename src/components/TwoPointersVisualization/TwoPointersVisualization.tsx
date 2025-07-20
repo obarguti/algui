@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import * as d3 from 'd3';
+import { ArrayWidget } from '../widgets';
 import './TwoPointersVisualization.scss';
 
 type AlgorithmPhase = 'idle' | 'processing' | 'deciding' | 'moving' | 'found' | 'not-found';
@@ -337,6 +338,21 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
       </div>
       
       <div className="visualization-container">
+        <ArrayWidget
+          data={array}
+          className="tp-array-widget"
+          config={{
+            showIndices: true,
+            colors: array.map((_, idx) => {
+              if (idx === leftPointer && idx === rightPointer) return '#ffd700'; // gold for both
+              if (idx === leftPointer) return '#87ceeb'; // blue for left
+              if (idx === rightPointer) return '#ff7f7f'; // red for right
+              return '';
+            }),
+            boxWidth: 60,
+            boxHeight: 48,
+          }}
+        />
         <svg
           ref={svgRef}
           width="800"

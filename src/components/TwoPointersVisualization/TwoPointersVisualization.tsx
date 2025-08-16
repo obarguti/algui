@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
 import * as d3 from 'd3';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrayWidget } from '../widgets';
 import './TwoPointersVisualization.scss';
 
@@ -9,8 +9,8 @@ interface TwoPointersVisualizationProps {
   className?: string;
 }
 
-export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> = ({ 
-  className = '' 
+export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> = ({
+  className = ''
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [arrayInput, setArrayInput] = useState('[1, 3, 6, 8, 11, 14, 19]');
@@ -19,7 +19,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
   const [leftPointer, setLeftPointer] = useState(0);
   const [rightPointer, setRightPointer] = useState(6);
   const [currentSum, setCurrentSum] = useState(0);
-  
+
   // Algorithm state
   const [phase, setPhase] = useState<AlgorithmPhase>('idle');
   const [iteration, setIteration] = useState(0);
@@ -67,7 +67,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
     }
 
     const sum = array[leftPointer] + array[rightPointer];
-    
+
     if (phase === 'idle' || phase === 'moving') {
       // Processing phase
       setPhase('processing');
@@ -208,7 +208,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
       g.append('polygon')
         .attr('points', `${leftX - 8},35 ${leftX + 8},35 ${leftX},45`)
         .attr('class', 'pointer left-pointer-arrow');
-      
+
       g.append('text')
         .attr('x', leftX)
         .attr('y', 25)
@@ -223,7 +223,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
       g.append('polygon')
         .attr('points', `${rightX - 8},35 ${rightX + 8},35 ${rightX},45`)
         .attr('class', 'pointer right-pointer-arrow');
-      
+
       g.append('text')
         .attr('x', rightX)
         .attr('y', 25)
@@ -298,10 +298,10 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
       .attr('class', 'section-title')
       .text('2. Compare & Decide');
 
-    const comparisonText = currentSum === target ? `${currentSum} = ${target}` : 
-                          currentSum < target ? `${currentSum} < ${target}` : 
-                          `${currentSum} > ${target}`;
-    
+    const comparisonText = currentSum === target ? `${currentSum} = ${target}` :
+      currentSum < target ? `${currentSum} < ${target}` :
+        `${currentSum} > ${target}`;
+
     g.append('text')
       .attr('x', section2X + 10)
       .attr('y', section2Y + 30)
@@ -336,7 +336,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
           Reset
         </button>
       </div>
-      
+
       <div className="visualization-container">
         <ArrayWidget
           data={array}
@@ -348,9 +348,7 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
               if (idx === leftPointer) return '#87ceeb'; // blue for left
               if (idx === rightPointer) return '#ff7f7f'; // red for right
               return '';
-            }),
-            boxWidth: 60,
-            boxHeight: 48,
+            })
           }}
         />
         <svg
@@ -360,24 +358,24 @@ export const TwoPointersVisualization: React.FC<TwoPointersVisualizationProps> =
           className="visualization-svg"
         />
       </div>
-      
+
       <div className="algorithm-controls">
         <div className="step-controls">
-          <button 
+          <button
             onClick={nextStep}
             disabled={phase === 'found' || phase === 'not-found' || isAutoRunning}
             className="step-btn"
           >
             Next Step
           </button>
-          <button 
+          <button
             onClick={startAutoRun}
             disabled={phase === 'found' || phase === 'not-found' || isAutoRunning}
             className="auto-btn"
           >
             Auto Run
           </button>
-          <button 
+          <button
             onClick={stopAutoRun}
             disabled={!isAutoRunning}
             className="stop-btn"

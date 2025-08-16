@@ -81,22 +81,31 @@ This project uses SASS/SCSS for styling. The styles are organized with:
 2. Use TypeScript for all components
 3. Use SCSS for styling
 4. Write meaningful commit messages
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+
+## Project Components
+
+### Configuration Files
+
+#### vite.config.ts
+Configures Vite build tool and development server. Currently registers the React plugin which handles JSX/TSX transformation, React Fast Refresh for hot reloading, and React-specific optimizations. This is a minimal setup that could be extended with additional plugins, dev server options, build configurations, and path aliases as needed.
+
+#### TypeScript Configuration
+- **`tsconfig.json`**: Root composite configuration that references the other TypeScript configs
+- **`tsconfig.app.json`**: Configuration for React app code (`src/` folder) - includes DOM types, JSX support, and browser-specific settings
+- **`tsconfig.node.json`**: Configuration for Node.js tooling files like `vite.config.ts` - includes Node.js types and server-side environment settings
+
+The separate configs are needed because build tools run in Node.js while the app runs in browsers, requiring different TypeScript settings and library types.
+
+#### package.json
+Defines project metadata, dependencies, and npm scripts. Key elements include:
+- **Scripts**: `dev` (start dev server), `build` (compile TypeScript and build), `lint` (run ESLint), `preview` (preview production build)
+- **Dependencies**: React 19, D3.js for visualizations, React Router for routing
+- **DevDependencies**: TypeScript, Vite, ESLint, SASS compiler, and type definitions
+
+#### eslint.config.js
+ESLint configuration for code quality and consistency. Uses the new flat config format with:
+- **TypeScript support**: Extends TypeScript ESLint recommended rules
+- **React plugins**: React Hooks rules and React Refresh for Vite
+- **File targeting**: Applies rules to `.ts` and `.tsx` files
+- **Global ignores**: Excludes `dist` folder from linting
 ```

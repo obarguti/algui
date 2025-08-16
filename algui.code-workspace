@@ -1,0 +1,223 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // TypeScript settings
+    "typescript.preferences.quoteStyle": "double",
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.suggest.autoImports": true,
+    
+    // ESLint settings
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ],
+    "eslint.workingDirectories": ["."],
+    
+    // Editor settings
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    
+    // File associations
+    "files.associations": {
+      "*.scss": "scss"
+    },
+    
+    // Auto-save settings
+    "files.autoSave": "onFocusChange",
+    
+    // CSS/SCSS settings
+    "css.validate": true,
+    "scss.validate": true,
+    "css.lint.unknownAtRules": "ignore",
+    
+    // Emmet settings for React
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact",
+      "typescript": "typescriptreact"
+    },
+    "emmet.syntaxProfiles": {
+      "javascript": "jsx",
+      "typescript": "jsx"
+    },
+    
+    // File explorer settings
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "*.tsx": "${capture}.scss, ${capture}.module.scss",
+      "*.ts": "${capture}.d.ts, ${capture}.test.ts, ${capture}.spec.ts",
+      "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml",
+      "tsconfig.json": "tsconfig.*.json",
+      "vite.config.ts": "vite.config.*.ts"
+    },
+    
+    // Search settings
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.git": true,
+      "**/coverage": true
+    },
+    
+    // Terminal settings
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    
+    // Git settings
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    
+    // Breadcrumbs
+    "breadcrumbs.enabled": true,
+    
+    // Minimap
+    "editor.minimap.enabled": true,
+    "editor.minimap.showSlider": "always"
+  },
+  "extensions": {
+    "recommendations": [
+      // Essential for React development
+      "ms-vscode.vscode-typescript-next",
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      
+      // React specific
+      "ms-vscode.vscode-react-native",
+      "formulahendry.auto-rename-tag",
+      "christian-kohler.path-intellisense",
+      
+      // SCSS/CSS
+      "syler.sass-indented",
+      "mrmlnc.vscode-scss",
+      
+      // Git
+      "eamodio.gitlens",
+      "github.vscode-pull-request-github",
+      
+      // Productivity
+      "christian-kohler.npm-intellisense",
+      "bradlc.vscode-tailwindcss",
+      "usernamehw.errorlens",
+      "ms-vscode.vscode-json",
+      
+      // Theme and icons
+      "vscode-icons-team.vscode-icons",
+      "github.github-vscode-theme",
+      
+      // Code snippets
+      "xabikos.reactsnippets",
+      "rodrigovallades.es7-react-js-snippets"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Development Server",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "dev"],
+        "group": "build",
+        "isBackground": true,
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Build for Production",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "build"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "Preview Production Build",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "preview"],
+        "group": "build",
+        "isBackground": true,
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Lint Code",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "lint"],
+        "group": "test",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": ["$eslint-stylish"]
+      },
+      {
+        "label": "Install Dependencies",
+        "type": "shell",
+        "command": "npm",
+        "args": ["install"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        }
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Chrome",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:5173",
+        "webRoot": "${workspaceFolder}/src"
+      }
+    ]
+  }
+}

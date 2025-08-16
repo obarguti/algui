@@ -11,11 +11,11 @@ A modern React application built with TypeScript, Vite, and SASS (SCSS).
 
 ## Features
 
-- ⚡ Fast development with Vite HMR
-- 🎨 SASS/SCSS styling with variables and mixins
-- 📦 TypeScript for type safety
-- 🔧 ESLint for code quality
-- 🚀 Optimized production builds
+- Fast development with Vite HMR
+- SASS/SCSS styling with variables and mixins
+- TypeScript for type safety
+- ESLint for code quality
+- Optimized production builds
 
 ## Getting Started
 

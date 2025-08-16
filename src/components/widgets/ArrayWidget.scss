@@ -1,5 +1,3 @@
-@use "../../styles/variables";
-
 .array-widget {
   display: flex;
   flex-direction: column;
@@ -17,23 +15,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid variables.$border-color;
-    background: variables.$background-color;
+    border: 1px solid $border-color;
+    background: $background-color;
     // margin-right: 6px;
     // border-radius: 4px;
     position: relative;
     font-size: 1.2rem;
-    color: variables.$text-color;
+    color: $text-color;
     box-sizing: border-box;
     transition: box-shadow 0.2s;
-    box-shadow: variables.$box-shadow-light;
+    box-shadow: $box-shadow-light;
     min-width: 40px;
     min-height: 40px;
   }
 
   .array-value {
     font-weight: 500;
-    color: variables.$text-color;
+    color: $text-color;
   }
 
   .array-indices {

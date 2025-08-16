@@ -1,0 +1,51 @@
+// Flexbox helpers
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Button mixin
+@mixin button-base {
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $border-radius;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $box-shadow-medium;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Card mixin
+@mixin card {
+  background: white;
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow-light;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: $box-shadow-medium;
+  }
+}

@@ -108,4 +108,18 @@ ESLint configuration for code quality and consistency. Uses the new flat config 
 - **React plugins**: React Hooks rules and React Refresh for Vite
 - **File targeting**: Applies rules to `.ts` and `.tsx` files
 - **Global ignores**: Excludes `dist` folder from linting
+
+### Project Structure
+
+#### Folder Organization
+- **`components/`** - Reusable UI components
+- **`pages/`** - Route/page components  
+- **`services/`** - API calls and external service logic
+- **`types/`** - TypeScript type definitions
+- **`data/`** - Static data and mock data
+- **`assets/`** - Images, fonts, icons processed by Vite bundler
+
+#### Asset Management
+- **`public/`** - Static assets served directly at root URL (favicons, robots.txt). Files copied as-is to build output.
+- **`src/assets/`** - Assets processed by Vite's build system. Imported in components, optimized with hashed filenames for caching.
 ```

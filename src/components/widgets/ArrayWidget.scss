@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@use "../../styles/variables";
 
 .array-widget {
   display: flex;
@@ -17,23 +17,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid $border-color;
-    background: $background-color;
+    border: 1px solid variables.$border-color;
+    background: variables.$background-color;
     // margin-right: 6px;
     // border-radius: 4px;
     position: relative;
     font-size: 1.2rem;
-    color: $text-color;
+    color: variables.$text-color;
     box-sizing: border-box;
     transition: box-shadow 0.2s;
-    box-shadow: $box-shadow-light;
+    box-shadow: variables.$box-shadow-light;
     min-width: 40px;
     min-height: 40px;
   }
 
   .array-value {
     font-weight: 500;
-    color: $text-color;
+    color: variables.$text-color;
   }
 
   .array-indices {

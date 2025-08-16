@@ -1,5 +1,5 @@
 // Import main SCSS with Bourbon
-@import "./styles/main";
+@use "./styles/main";
 
 // Additional global styles specific to this app
 body {

@@ -1,7 +1,5 @@
 // Main SCSS entry point
-@use "bourbon";
-@use "variables";
-@use "mixins";
+@use "./index" as *;
 
 // Global styles
 * {
@@ -9,8 +7,8 @@
 }
 
 body {
-  font-family: variables.$font-family-primary;
-  color: variables.$text-color;
+  font-family: $font-family-primary;
+  color: $text-color;
   background-color: white;
   margin: 0;
   padding: 0;
@@ -19,13 +17,13 @@ body {
 
 // Utility classes
 .flex-center {
-  @include mixins.flex-center;
+  @include flex-center;
 }
 
 .flex-between {
-  @include mixins.flex-between;
+  @include flex-between;
 }
 
 .flex-column {
-  @include mixins.flex-column;
+  @include flex-column;
 }
